@@ -138,27 +138,40 @@ body {
     text-align: center;
 }
 
-.keypad {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+.room-list {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-top: 10px;
 }
 
-.key-btn {
-    aspect-ratio: 1;
+.room-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: white;
     border: 2px solid var(--secondary-color);
     border-radius: 10px;
-    font-size: 1.5rem;
+    padding: 15px 20px;
+    font-size: 1.2rem;
     color: #FBC02D;
     font-weight: bold;
     box-shadow: 0 4px 0 #F9A825;
+    cursor: pointer;
+    transition: transform 0.1s;
 }
 
-.key-btn:active {
+.room-btn:active {
     transform: translateY(4px);
     box-shadow: none;
+}
+
+.room-btn .room-count {
+    background: #FFF3E0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 1rem;
+    color: #EF6C00;
 }
 
 /* Waiting Room */

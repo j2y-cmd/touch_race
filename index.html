@@ -32,18 +32,28 @@
             </div>
 
             <div class="room-select">
-                <p>방 번호를 선택하세요 (0~9)</p>
-                <div class="keypad">
-                    <button class="key-btn">0</button>
-                    <button class="key-btn">1</button>
-                    <button class="key-btn">2</button>
-                    <button class="key-btn">3</button>
-                    <button class="key-btn">4</button>
-                    <button class="key-btn">5</button>
-                    <button class="key-btn">6</button>
-                    <button class="key-btn">7</button>
-                    <button class="key-btn">8</button>
-                    <button class="key-btn">9</button>
+                <p>방을 선택하세요 (최대 6명)</p>
+                <div class="room-list">
+                    <button class="room-btn" data-room="1">
+                        <span class="room-num">1번방</span>
+                        <span class="room-count" id="count-1">0/6</span>
+                    </button>
+                    <button class="room-btn" data-room="2">
+                        <span class="room-num">2번방</span>
+                        <span class="room-count" id="count-2">0/6</span>
+                    </button>
+                    <button class="room-btn" data-room="3">
+                        <span class="room-num">3번방</span>
+                        <span class="room-count" id="count-3">0/6</span>
+                    </button>
+                    <button class="room-btn" data-room="4">
+                        <span class="room-num">4번방</span>
+                        <span class="room-count" id="count-4">0/6</span>
+                    </button>
+                    <button class="room-btn" data-room="5">
+                        <span class="room-num">5번방</span>
+                        <span class="room-count" id="count-5">0/6</span>
+                    </button>
                 </div>
             </div>
             <p id="lobby-status" class="status-msg"></p>

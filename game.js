@@ -64,6 +64,7 @@ const btnBackLobby = document.getElementById('btn-back-lobby');
 const btnLeave = document.getElementById('btn-leave');
 
 // --- Event Listeners: Lobby ---
+// --- Event Listeners: Lobby ---
 nicknameInput.value = localStorage.getItem('tr_nickname') || "";
 
 charBtns.forEach(btn => {
@@ -74,9 +75,9 @@ charBtns.forEach(btn => {
     });
 });
 
-document.querySelectorAll('.key-btn').forEach(btn => {
+document.querySelectorAll('.room-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const roomNum = btn.innerText;
+        const roomNum = btn.dataset.room;
         const name = nicknameInput.value.trim();
         if (!name) {
             alert("이름을 입력해주세요!");
@@ -87,6 +88,29 @@ document.querySelectorAll('.key-btn').forEach(btn => {
         myState.name = name;
         joinRoom(roomNum);
     });
+});
+
+// Monitor Rooms for Lobby UI
+onValue(ref(db, 'rooms'), (snapshot) => {
+    const rooms = snapshot.val() || {};
+    for (let i = 1; i <= 5; i++) {
+        const countEl = document.getElementById(`count-${i}`);
+        if (countEl) {
+            const roomData = rooms[i];
+            const pCount = roomData && roomData.players ? Object.keys(roomData.players).length : 0;
+            countEl.innerText = `${pCount} / ${MAX_PLAYERS}`;
+
+            // Visual cue for full rooms
+            const btn = document.querySelector(`.room-btn[data-room="${i}"]`);
+            if (pCount >= MAX_PLAYERS) {
+                btn.style.opacity = "0.6";
+                btn.style.filter = "grayscale(1)";
+            } else {
+                btn.style.opacity = "1";
+                btn.style.filter = "none";
+            }
+        }
+    }
 });
 
 // --- Event Listeners: Waiting ---
@@ -344,7 +368,7 @@ function startGameSequence() {
     }, 1000);
 }
 
-function updateRunnersUnsafe(currentPlayers) {
+function updateRunnersUnsafe() {
     // Only update *other* players to avoid jitter on my own runner?
     // Actually, Firebase local events fire immediately for me, so it's fine.
 
