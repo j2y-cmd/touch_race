@@ -91,14 +91,32 @@ document.querySelectorAll('.room-btn').forEach(btn => {
 });
 
 // Monitor Rooms for Lobby UI
+// Monitor Rooms for Lobby UI
 onValue(ref(db, 'rooms'), (snapshot) => {
     const rooms = snapshot.val() || {};
     for (let i = 1; i <= 4; i++) {
         const countEl = document.getElementById(`count-${i}`);
+        const previewEl = document.getElementById(`preview-${i}`); // [NEW]
+
         if (countEl) {
             const roomData = rooms[i];
-            const pCount = roomData && roomData.players ? Object.keys(roomData.players).length : 0;
+            const playersInRoom = roomData ? roomData.players || {} : {};
+            const pKeys = Object.keys(playersInRoom);
+            const pCount = pKeys.length;
+
             countEl.innerText = `${pCount} / ${MAX_PLAYERS}`;
+
+            // [NEW] Text Preview: "🐰 Name, 🐢 Name2..."
+            if (previewEl) {
+                if (pCount === 0) {
+                    previewEl.innerText = "대기 중...";
+                } else {
+                    const previewText = Object.values(playersInRoom)
+                        .map(p => `${p.char} ${p.name}`)
+                        .join(", ");
+                    previewEl.innerText = previewText;
+                }
+            }
 
             // Visual cue for full rooms
             const btn = document.querySelector(`.room-btn[data-room="${i}"]`);
