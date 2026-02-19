@@ -6,7 +6,7 @@ import { getDatabase, ref, set, get, onValue, update, remove, onDisconnect, runT
 const firebaseConfig = {
     apiKey: "AIzaSyCKDTKMDldMP6i6Mcvhn6J1vB_gQ9Q71JE",
     authDomain: "touch-race-d6022.firebaseapp.com",
-    databaseURL: "https://touch-race-d6022-default-rtdb.firebaseio.com",
+    databaseURL: "https://touch-race-d6022.firebaseio.com",
     projectId: "touch-race-d6022",
     storageBucket: "touch-race-d6022.firebasestorage.app",
     messagingSenderId: "562896691028",
