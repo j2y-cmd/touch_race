@@ -419,8 +419,8 @@ function updateRunnersUnsafe() {
     Object.entries(players).forEach(([pid, p]) => {
         const runnerEl = document.getElementById(`runner-${pid}`);
         if (runnerEl) {
-            const pct = Math.min((p.score / WIN_SCORE) * 100, 100);
-            runnerEl.style.left = `calc(${pct}% - 30px)`;
+            const pct = Math.min((p.score / WIN_SCORE) * 90, 90); // Cap at 90% to stay on screen
+            runnerEl.style.left = `${pct}%`;
         }
     });
 }
