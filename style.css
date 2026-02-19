@@ -84,8 +84,11 @@ body {
 #lobby-scene {
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+    /* Reduced from 20px */
     background: #FFECB3;
+    padding-top: env(safe-area-inset-top);
+    /* Handle iPhone Notch */
 }
 
 .game-title {
@@ -93,7 +96,8 @@ body {
     text-align: center;
     color: #FF6F00;
     text-shadow: 2px 2px 0 #fff;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    /* Reduced from 20px */
 }
 
 .input-group {
