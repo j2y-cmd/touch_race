@@ -404,7 +404,7 @@ function startGameSequence() {
         if (count > 0) {
             countdownText.innerText = count;
         } else if (count === 0) {
-            countdownText.innerText = "START!";
+            countdownText.innerText = "땅!";
             gameStatus = 'playing';
 
             // [NEW] Host starts 1-minute timer
