@@ -346,6 +346,12 @@ function sceneInitWaiting() {
                 // No, only when *I* flip finish line or user requests status.
             }
         }
+
+        // [NEW] Check Timeover
+        if (room.status === 'timeover') {
+            alert("경기 시간이 1분을 초과하여 강제 종료됩니다. ⏰");
+            window.location.reload();
+        }
     });
 }
 
@@ -400,6 +406,17 @@ function startGameSequence() {
         } else if (count === 0) {
             countdownText.innerText = "START!";
             gameStatus = 'playing';
+
+            // [NEW] Host starts 1-minute timer
+            if (myState.isHost) {
+                setTimeout(() => {
+                    // Force end game if still running (simple check: just update status)
+                    // We can check if everyone finished, but request says "force end".
+                    update(ref(db, `rooms/${myState.room}`), {
+                        status: 'timeover'
+                    });
+                }, 60000); // 1 minute
+            }
         } else {
             clearInterval(interval);
             countdownOverlay.classList.add('hidden');
