@@ -135,8 +135,9 @@ function switchScene(sceneName) {
 }
 
 function joinRoom(roomNum) {
+    console.log(`[DEBUG] Joining room: ${roomNum}`);
     if (!db) {
-        alert("Firebase 설정이 되지 않았습니다.");
+        alert("데이터베이스 연결 실패: Firebase 설정 오류");
         return;
     }
 
@@ -183,6 +184,7 @@ function joinRoom(roomNum) {
 
         return room;
     }).then((result) => {
+        console.log("[DEBUG] Transaction result:", result);
         if (result.committed) {
             myState.room = roomNum;
             const roomData = result.snapshot.val();
@@ -198,7 +200,7 @@ function joinRoom(roomNum) {
             alert("방이 꽉 찼거나 이미 게임이 시작되었습니다.");
         }
     }).catch(err => {
-        console.error(err);
+        console.error("[DEBUG] Join Room Error:", err);
         alert("접속 오류: " + err.message);
     });
 }
