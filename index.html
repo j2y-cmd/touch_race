@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>터치터치 달리기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK will be loaded dynamically or via module in game.js -->
+</head>
+
+<body>
+
+    <div id="app-container">
+        <!-- 1. Lobby Scene -->
+        <div id="lobby-scene" class="scene">
+            <h1 class="game-title">터치터치<br>달리기! 🏃💨</h1>
+
+            <div class="input-group">
+                <label>닉네임 (동물)</label>
+                <div class="character-select">
+                    <button class="char-btn selected" data-char="🐰">🐰</button>
+                    <button class="char-btn" data-char="🐢">🐢</button>
+                    <button class="char-btn" data-char="🐶">🐶</button>
+                    <button class="char-btn" data-char="🐱">🐱</button>
+                    <button class="char-btn" data-char="🐯">🐯</button>
+                    <button class="char-btn" data-char="🐷">🐷</button>
+                </div>
+                <input type="text" id="nickname-input" placeholder="이름을 입력하세요" maxlength="5">
+            </div>
+
+            <div class="room-select">
+                <p>방 번호를 선택하세요 (0~9)</p>
+                <div class="keypad">
+                    <button class="key-btn">0</button>
+                    <button class="key-btn">1</button>
+                    <button class="key-btn">2</button>
+                    <button class="key-btn">3</button>
+                    <button class="key-btn">4</button>
+                    <button class="key-btn">5</button>
+                    <button class="key-btn">6</button>
+                    <button class="key-btn">7</button>
+                    <button class="key-btn">8</button>
+                    <button class="key-btn">9</button>
+                </div>
+            </div>
+            <p id="lobby-status" class="status-msg"></p>
+        </div>
+
+        <!-- 2. Waiting Room Scene -->
+        <div id="waiting-scene" class="scene hidden">
+            <div class="header">
+                <h2 id="room-title">방 0</h2>
+                <button id="btn-leave" class="small-btn">나가기</button>
+            </div>
+
+            <div class="player-list" id="player-list">
+                <!-- Players will be added here -->
+            </div>
+
+            <div class="waiting-status">
+                <p id="player-count">0 / 6 명</p>
+                <p class="guide-text">방장이 게임을 시작할 수 있습니다.</p>
+            </div>
+
+            <button id="btn-start-game" class="primary-btn hidden">게임 시작!</button>
+            <p id="waiting-msg">방장의 시작을 기다리는 중...</p>
+        </div>
+
+        <!-- 3. Game Scene -->
+        <div id="game-scene" class="scene hidden">
+            <div class="track-container" id="track-container">
+                <!-- Lanes will be generated here -->
+            </div>
+
+            <div class="control-area">
+                <button id="btn-run" class="run-btn">달려! 💨</button>
+            </div>
+
+            <div id="countdown-overlay" class="overlay hidden">
+                <span id="countdown-text">3</span>
+            </div>
+        </div>
+
+        <!-- 4. Result Modal -->
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🏆 경기 결과 🏆</h2>
+                <ul id="rank-list">
+                    <!-- Ranks -->
+                </ul>
+                <button id="btn-back-lobby" class="primary-btn">로비로 돌아가기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Firebase SDKs -->
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>
