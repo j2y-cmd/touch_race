@@ -270,7 +270,7 @@ function sceneInitWaiting() {
         // Creating Track Runners handled in Game Sequence mainly, 
         // but we can update positions if playing
         if (gameStatus === 'playing') {
-            updateRunnersUnsafe(currentPlayers);
+            updateRunnersUnsafe(players);
         }
 
         // Check Winners logic
