@@ -185,14 +185,32 @@ function joinRoom(roomNum) {
             };
         }
 
+        const currentPlayers = room.players || {};
+        const playerKeys = Object.keys(currentPlayers);
+
+        // [FIX] If room is empty (or ghost room), reset it to start fresh
+        if (playerKeys.length === 0) {
+            return {
+                status: 'waiting',
+                players: {
+                    [myState.id]: {
+                        name: myState.name,
+                        char: myState.char,
+                        score: 0,
+                        isHost: true // I am the new host
+                    }
+                },
+                winners: []
+            };
+        }
+
         if (room.status !== 'waiting') {
             // Cannot join running game
             // (returning undefined aborts transaction)
             return;
         }
 
-        const currentPlayers = room.players || {};
-        if (Object.keys(currentPlayers).length >= MAX_PLAYERS) {
+        if (playerKeys.length >= MAX_PLAYERS) {
             // Room full
             return;
         }
