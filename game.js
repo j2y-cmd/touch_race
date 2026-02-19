@@ -93,7 +93,7 @@ document.querySelectorAll('.room-btn').forEach(btn => {
 // Monitor Rooms for Lobby UI
 onValue(ref(db, 'rooms'), (snapshot) => {
     const rooms = snapshot.val() || {};
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 4; i++) {
         const countEl = document.getElementById(`count-${i}`);
         if (countEl) {
             const roomData = rooms[i];
