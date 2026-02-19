@@ -35,7 +35,8 @@ let myState = {
     room: null,
     score: 0,
     isHost: false,
-    finished: false
+    finished: false,
+    isIntentionalLeave: false // [NEW] Flag to suppress alert
 };
 let players = {};
 let gameStatus = 'waiting'; // waiting, countdown, playing, ended
@@ -267,6 +268,7 @@ function joinRoom(roomNum) {
 
 function leaveRoom() {
     if (myState.room) {
+        myState.isIntentionalLeave = true; // [NEW] Mark as intentional
         remove(ref(db, `rooms/${myState.room}/players/${myState.id}`));
 
         myState.room = null;
@@ -297,6 +299,7 @@ function sceneInitWaiting() {
 
         // Check if I was kicked
         if (!players[myState.id]) {
+            if (myState.isIntentionalLeave) return; // [NEW] Ignore if I left
             alert("연결이 끊어졌습니다.");
             window.location.reload();
             return;
